@@ -65,15 +65,29 @@ class SongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(params[:song])
-    respond_to do |format|
-      if @song.save
-        format.html { redirect_to(@song, :notice => 'Song was successfully created.') }
-        format.json  { render :json => @song, :status => :created, :location => @song }
-      else
-        format.html { render :action => "new" }
-        format.json  { render :json => @song.errors, :status => :unprocessable_entity }
+    link = "http://ws.audioscrobbler.com/2.0/?method=track.getinfo&artist=#{URI.encode(params[:song][:artist])}&track=#{URI.encode(params[:song][:title])}&api_key=46717f37e986f321258ffb9d1191b489"
+    begin
+      @doc = Nokogiri::XML(open(link))
+      @doc.xpath("//track").each do |node|
+        @out <<  {
+                      "track"         =>  node.xpath("./name").text,
+                      "trackUrl"      =>  node.xpath("./url").text,
+                      "artistUrl"     =>  node.xpath(".//artist/url").text,
+                      "artist"        =>  node.xpath(".//artist/name").text,
+                      "image"         =>  node.xpath(".//album/image[@size='large']").text
+                    }
       end
+      @song = Song.new(@out)
+      respond_to do |format|
+        if @song.save
+          format.html { redirect_to(@song, :notice => 'Song was successfully created.') }
+          format.json  { render :json => @song, :status => :created, :location => @song }
+        else
+          format.html { render :action => "new" }
+          format.json  { render :json => @song.errors, :status => :unprocessable_entity }
+        end
+      end
+    rescue
     end
   end
 

@@ -103,10 +103,10 @@ $(function(){
 	  initialize: function(){
 	    _.bindAll(this, 'addOne', 'addAll');
 	
-		console.log('initialize');
-		
-		this.song_title = this.$("#song_title")[0];
-		this.song_artist = this.$("#song_artist")[0];
+      console.log('initialize');
+
+      this.song_title = this.$("#song_title")[0];
+      this.song_artist = this.$("#song_artist")[0];
     
 	    Songs.bind('add', this.addOne);
 	    Songs.bind('reset', this.addAll);
@@ -133,13 +133,13 @@ $(function(){
 	      }}
 	  },
 	
-	  createOnEnter: function(e) {
-		if(e != 13) return;
-		var params = this.newAttributes(e);
-	    var song = Songs.create(params);
-		this.$("#song_list").append(song.render().el);
-		console.log("lolcats" + song);
-	},
+    createOnEnter: function(e) {
+      if(e != 13) return;
+      var params = this.newAttributes(e);
+      var song = Songs.create(params);
+      this.$("#song_list").append(song.render().el);
+      //console.log("lolcats" + song);
+    },
   
 	  createSong: function(e) {
 	    e.preventDefault(); //This prevents the form from submitting normally
