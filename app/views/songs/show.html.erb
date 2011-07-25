@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @song.title %>
+</p>
+
+<p>
+  <b>Artist:</b>
+  <%= @song.artist %>
+</p>
+
+
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>
+
+<script id="song_item" type="text/html">
+<div id='{{id}}'>
+	<div class='listTrackContent'>
+		<a href="#show/{{id}}">{{title}} by {{artist}}</a>
+		<ol class="{{id}}">
+		</ol>
+	</div>
+</div>
+</script>

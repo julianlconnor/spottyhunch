@@ -1,0 +1,23 @@
+<div id="songs_app">
+	<h1 id="logo">Spotify Playlist Generator</h1>
+	<ol id="song_list">
+	</ol>
+	
+	<%= render 'form' %>
+</div>
+
+<script id="song_item" type="text/html">
+<div id='{{id}}'>
+	<div class='listTrackContent'>
+		<a href="#show/{{id}}">{{title}} by {{artist}}</a>
+		<ol class="{{id}}">
+		</ol>
+	</div>
+</div>
+</script>
+
+<script id="similar_song_item" type="text/html">
+<li><a href="{{trackUrl}}">{{title}}</a> by <a href="{{artistUrl}}">{{artist}}</a></li>
+</script>
+
+

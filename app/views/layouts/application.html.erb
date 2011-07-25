@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spottyhunch</title>
+  <%= stylesheet_link_tag :all %>
+  <%= include_javascripts :app %>
+  <%= csrf_meta_tag %>
+</head>
+<body id="home">
+	<div id="wrap">
+		<%= yield %>
+	</div>
+</body>
+</html>

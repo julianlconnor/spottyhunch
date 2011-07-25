@@ -1,0 +1,11 @@
+javascripts:
+  app:
+    - public/javascripts/jquery.js
+    - public/javascripts/application.js
+    - public/javascripts/jquery_ujs.js
+    - public/javascripts/json2.js
+    - public/javascripts/underscore.js
+    - public/javascripts/backbone-0.5.0.js
+    - public/javascripts/icanhaz.js
+    - public/javascripts/songs.js
+    - app/views/songs/*.jst    

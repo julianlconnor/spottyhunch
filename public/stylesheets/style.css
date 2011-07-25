@@ -1,0 +1,48 @@
+body {
+	line-height: 1.45em;
+	margin: 0 auto;
+	background-color:#F7FCFF;
+	font-family: 'Lucida Grande', Arial, sans-serif;
+}
+
+body#home {
+  width:810px;
+}
+
+#songs_app {
+	position: relative;
+}
+
+h1#logo {
+	text-align: center;
+}
+
+#wrap {
+  padding: 0 20px 20px 20px;
+}
+
+ol#song_list, ol#song_list ol {
+	list-style-type: none;
+	padding: 0;
+}
+
+ol#song_list li {
+	text-align: center;
+	padding: 15px;
+	-webkit-box-shadow:white 0 1px 0px, rgba(0, 0, 0, 0.496094) 0 1px 3px 0 inset;
+	background-attachment:initial;
+	background-clip:initial;
+	background-color:rgba(0, 0, 0, 0.0351562);
+	background-image:initial;
+	background-origin:initial;
+	background-position:initial initial;
+	background-repeat:initial initial;
+	box-shadow:white 0 1px 0px, rgba(0, 0, 0, 0.496094) 0 1px 3px 0 inset;
+	text-shadow:#FFFFFF 0 1px 1px;
+	margin-bottom: 5px;
+	border-radius: 3px;
+}
+
+ol#song_list ol li {
+	margin-top: 10px;
+}
