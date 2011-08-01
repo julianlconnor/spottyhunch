@@ -5,6 +5,7 @@ gem 'pg'
 gem 'mongrel'
 gem 'jammit'
 gem 'ruby-debug'
+gem 'oauth'
 
 gem "jquery-rails", "~> 1.0.12"
 

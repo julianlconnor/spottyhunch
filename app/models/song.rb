@@ -1,3 +1,3 @@
 class Song < ActiveRecord::Base
-  validates :title, :uniqueness => {:scope => :artist}
+  validates :track, :uniqueness => {:scope => :artist}
 end

@@ -1,23 +1,63 @@
 <div id="songs_app">
 	<h1 id="logo">Spotify Playlist Generator</h1>
+	<div id="flash_space"></div>
 	<ol id="song_list">
 	</ol>
-	
-	<%= render 'form' %>
+  <%= render 'form' %>
 </div>
-
+	
 <script id="song_item" type="text/html">
 <div id='{{id}}'>
 	<div class='listTrackContent'>
-		<a href="#show/{{id}}">{{title}} by {{artist}}</a>
+		<div class="content">
+			<div class="trackInfo">
+				<a href="{{trackUrl}}" target="_blank">{{track}}</a> - <a href="{{artistUrl}}" target="_blank">{{artist}}</a>
+				<div class="icons">
+					<span class="delete"><img src="images/delete.png"/></span>
+					<span class="expand"><img src="images/expand.png"/></span>
+				</div>
+			</div>
+		</div>
 		<ol class="{{id}}">
 		</ol>
 	</div>
 </div>
 </script>
 
-<script id="similar_song_item" type="text/html">
-<li><a href="{{trackUrl}}">{{title}}</a> by <a href="{{artistUrl}}">{{artist}}</a></li>
+<script id="error_item" type="text/html">
+<div class="error">{{error}}</div>
 </script>
 
+<script id="similar_song_item" type="text/html">
+<li class="track">
+	<div class="trackImage">
+
+	</div>
+	<div class="trackInfo">
+		<div class="track">
+			<a href="{{spotifyUrl}}" target="_blank">{{track}}</a>
+		</div>
+		<div class="artist">
+			<a href="{{artistUrl}}" target="_blank">{{artist}}</a>
+		</div>
+	</div>
+</li>
+</script>
+
+<!-- Copy & Paste -->
+<script type="text/javascript">
+    $(function() {
+            ZeroClipboard.setMoviePath( 'http://www.mumbls.com/ZeroClipboard.swf' );
+            //Create a new clipboard client
+            var clip = new ZeroClipboard.Client();
+            
+            clip.glue('copy-description1');
+            clip.setText("asdf");
+
+            //Add a complete event to let the user know the text was copied
+            clip.addEventListener('complete', function(client, text) {
+                alert("Copied text to clipboard:\n" + text);
+            });
+    });                               
+</script>
 

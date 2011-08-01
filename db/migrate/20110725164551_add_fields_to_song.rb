@@ -7,5 +7,9 @@ class AddFieldsToSong < ActiveRecord::Migration
   end
 
   def self.down
+    remove_column :songs, :trackUrl
+    remove_column :songs, :artistUrl
+    remove_column :songs, :image
+    rename_column :songs, :track, :title
   end
 end

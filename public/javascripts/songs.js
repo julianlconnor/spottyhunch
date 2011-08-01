@@ -13,14 +13,26 @@ $(function(){
 
 		initialize: function(){
 		//Can be used to initialize Model attributes
-		}
+		},
+		
+		clear: function() {
+      this.destroy();
+      this.view.remove();
+    }
+    
+	});
+	
+	window.Error = Backbone.Model.extend({
+
 	});
 	
 
 	//Collection
 	window.SongCollection = Backbone.Collection.extend({
+	  
 		model: Song,
 		url: '/'
+	
 	});
 
 	window.Songs = new SongCollection();
@@ -30,40 +42,56 @@ $(function(){
 	//Song View
 	window.SongView = Backbone.View.extend({
 		tagName: "li",
-
+		
+		className: "track",
+    
 		events: { 
-			"dblclick div.listTrackContent" : "expand",
-			"dblclick li.active"		   	: "collapse",
-			//"dblclick p.viewTrackContent"  : "render"
+			"click span.expand"           : "expand",
+			"click span.expand.active"	  : "collapse",
+			"click span.delete"           : "clear",
 		},
 
 		initialize: function(){
-
+		  this.model.bind('change', this.render);
+      this.model.view = this;
 		},
 
+    clear: function() {
+      this.model.clear();
+    },
+
 		expand: function(){
-			$(this.el).addClass("active");
+		  var expand = $(this.el).find(".expand");
+		  if (expand.hasClass("active")){
+		    expand.html("<img src='images/expand.png'/>");
+		  }
+		  else {
+		    expand.html("<img src='images/contract.png'/>");
+		  }
+		  expand.toggleClass("active");
 			var id = this.model.id;
 			if ($("ol."+id).children().length > 0) {
 				$("ol."+id).slideToggle();		
 			}
 			else {
+			  expand.html("<img class='loading' src='images/24.gif'/>");
 				$.getJSON('/similar/'+this.model.id, function(data) {
-		            if(data && data.length > 0) {
-		                var songs = _(data).map(
-							function(i) {
-								//alert(JSON.stringify(i));
-								return jQuery.parseJSON('{"title":"'+i.title+'","artist":"'+i.artist+'","image":"'+i.image+'","artistUrl":"'+i.artistUrl+'","trackUrl":"'+i.trackUrl+'"}');
-						});
-		                $.each(songs,function(){
-							//alert(JSON.stringify(this));
-							$("ol."+id).append(ich.similar_song_item(this));
-						});
-		            }
-					else {
-		                new Error({ message: "Last.fm sucks." });
-					}
-		        });
+            if(data && data.length > 0) {
+              var songs = _(data).map(
+                function(i) {
+                //alert(JSON.stringify(i));
+                return jQuery.parseJSON('{"track":"'+i.track+'","artist":"'+i.artist+'","image":"'+i.image+'","artistUrl":"'+i.artistUrl+'","trackUrl":"'+i.trackUrl+'","spotifyUrl":"'+i.spotifyUrl+'"}');
+              });
+              $.each(songs,function(){
+                //alert(JSON.stringify(this));
+                $("ol."+id).append(ich.similar_song_item(this));
+              });
+              expand.html("<img src='images/contract.png'/>");
+            }
+            else {
+              new Error({ message: "Last.fm sucks." });
+            }
+	      });
 			}
 			//Template stuff goes here
 			// $("#songs_app").html(ich.song_template(song));
@@ -73,6 +101,10 @@ $(function(){
 		collapse: function(){
 			$(this.el).removeClass("active");
 		},
+		
+		remove: function() {
+      $(this.el).remove();
+    },
 		
 		render: function(){
 			var song = this.model.toJSON();
@@ -90,6 +122,21 @@ $(function(){
 			// 			this.input.val(content);
 	    },
 	});
+	
+	window.ErrorView = Backbone.View.extend({
+	  tagName: "span",
+	  
+	  initialize: function(){
+	    
+	  },
+	
+	  
+	  render: function(){
+	    var error = this.model.toJSON();
+	    $(this.el).html(ich.error_item(error));
+	    return this
+	  }
+	})
 
 	//Application View
 	window.AppView = Backbone.View.extend({
@@ -97,17 +144,13 @@ $(function(){
 	  el: $("#songs_app"),
 
 	  events: {
-	    "submit form#new_song": "createSong"
+	    "submit form#new_song": "createSong",
+	    "keypress input#song_artist": "createOnEnter"
 	  },
 
 	  initialize: function(){
 	    _.bindAll(this, 'addOne', 'addAll');
-	
-      console.log('initialize');
-
-      this.song_title = this.$("#song_title")[0];
-      this.song_artist = this.$("#song_artist")[0];
-    
+      Songs.bind('change', this.render);
 	    Songs.bind('add', this.addOne);
 	    Songs.bind('reset', this.addAll);
 	    Songs.bind('all', this.render);
@@ -116,8 +159,16 @@ $(function(){
 	  },
   
 	  addOne: function(song) {
-	    var view = new SongView({model: song});
-	    this.$("#song_list").append(view.render().el);
+	    if (!song.get("error"))
+	    {
+	      var view = new SongView({model: song});
+  	    this.$("#song_list").append(view.render().el);
+	    }
+  	  else {
+  	    console.log("Error");
+  	    var error = new ErrorView({model:song});
+  	    this.$("#flash_space").html(error.render().el);
+  	  }
 	  },
   
 	  addAll: function(){
@@ -128,29 +179,31 @@ $(function(){
 	    var new_song_form = $(event.currentTarget).serializeObject();
 	    //alert (JSON.stringify(new_dog_form));
 	    return { song: {
-	        title: new_song_form["song[title]"],
+	        track: new_song_form["song[track]"],
 	        artist: new_song_form["song[artist]"]
 	      }}
+	    console.log('Clearing form data.');
+      $("input#song_track").text = "";
+      $("input#song_artist").text = "";
 	  },
 	
     createOnEnter: function(e) {
-      if(e != 13) return;
+      //console.log("CreateOnEnter:" + e.keyCode);
+      if(e.keyCode != 13) return;
       var params = this.newAttributes(e);
-      var song = Songs.create(params);
-      this.$("#song_list").append(song.render().el);
+      Songs.create(params);
+      // this.$("#song_list").append(song.render().el);
       //console.log("lolcats" + song);
     },
   
 	  createSong: function(e) {
-	    e.preventDefault(); //This prevents the form from submitting normally
-    
-	    var params = this.newAttributes(e);
-    
-	    Songs.create(params);
-    
-	    //TODO - Clear the form fields after submitting
-		this.song_title.value = '';
-		this.song_artist.value = '';
+      e.preventDefault(); //This prevents the form from submitting normally
+
+      var params = this.newAttributes(e);
+
+      Songs.create(params);
+
+      //TODO - Clear the form fields after submitting
 	  }
 
 	});

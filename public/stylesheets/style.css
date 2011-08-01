@@ -1,19 +1,75 @@
+#overlay{
+	background-image: url(/images/overlay.png);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 90;
+	width: 100%;
+	height: 100%;
+}
+
+* html #overlay{
+	background-color: #333;
+	background-color: transparent;
+	background-image: url(blank.gif);
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+        src="/images/overlay.png", sizingMethod="scale");
+}
+
+#box{
+	width:300px;
+	background:#2d2d2d;
+	padding:10px;
+	border:2px solid #eee;
+}
+
+#close{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    cursor:pointer;
+}
+
 body {
 	line-height: 1.45em;
 	margin: 0 auto;
 	background-color:#F7FCFF;
-	font-family: 'Lucida Grande', Arial, sans-serif;
+	font: normal normal normal 1em/1.4 Cambria, Georgia, sans-serif;
+}
+
+a:link, li a:visited {
+  color: #000;
+  text-decoration: none;
 }
 
 body#home {
-  width:810px;
+  width:500px;
+}
+
+input {
+  -webkit-box-shadow:rgba(0, 0, 0, 0.199219) 0 1px 2px 0 inset;
+  border: 1px solid #999999;
+  border-radius: 2px;
+  box-shadow:rgba(0, 0, 0, 0.199219) 0 1px 2px 0 inset;
+  font-family:inherit;
+  font-size:24px;
+  line-height:1.4em;
+  outline-color:initial;
+  outline-style:none;
+  outline-width:initial;
+  padding: 6px;
+  width: 448px;
 }
 
 #songs_app {
 	position: relative;
 }
 
-h1#logo {
+.expand img.loading {
+  padding: 0 4px 5px 5px;
+}
+
+h1#logo {  
 	text-align: center;
 }
 
@@ -26,8 +82,11 @@ ol#song_list, ol#song_list ol {
 	padding: 0;
 }
 
-ol#song_list li {
-	text-align: center;
+ol#song_list ol li {
+  text-align: left !important;
+}
+
+ol#song_list li.track {
 	padding: 15px;
 	-webkit-box-shadow:white 0 1px 0px, rgba(0, 0, 0, 0.496094) 0 1px 3px 0 inset;
 	background-attachment:initial;
@@ -45,4 +104,43 @@ ol#song_list li {
 
 ol#song_list ol li {
 	margin-top: 10px;
+	font-size: 20px;
+}
+
+.listTrackContent ol li.track {
+  height: 60px;
+  width: 400px;
+}
+.listTrackContent ol li div.trackInfo {
+  float: left;
+  padding-left: 23px;
+}
+li .trackImage {
+  float: left;
+}
+
+li .content {
+}
+
+li .expand, li .delete {
+  cursor: pointer;
+}
+
+span.delete img {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+
+li .expand:hover {
+  color: #fcfcfc;
+}
+
+li div.icons {
+  padding: 0;
+  display: inline;
+  list-style: none;
+}
+
+li div.icons {
+  float: right;
 }
