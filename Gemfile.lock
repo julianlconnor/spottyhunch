@@ -36,8 +36,6 @@ GEM
     arel (1.0.1)
       activesupport (~> 3.0.0)
     builder (2.1.2)
-    cgi_multipart_eof_fix (2.5.0)
-    daemons (1.1.4)
     em-http-request (0.3.0)
       addressable (>= 2.0.0)
       escape_utils
@@ -46,8 +44,6 @@ GEM
       abstract (>= 1.0.0)
     escape_utils (0.2.3)
     eventmachine (0.12.10)
-    fastthread (1.0.7)
-    gem_plugin (0.2.3)
     i18n (0.4.2)
     jammit (0.6.3)
       yui-compressor (>= 0.9.3)
@@ -60,11 +56,6 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mongrel (1.1.5)
-      cgi_multipart_eof_fix (>= 2.4)
-      daemons (>= 1.0.3)
-      fastthread (>= 1.0.1)
-      gem_plugin (>= 0.2.3)
     nokogiri (1.5.0)
     oauth (0.4.5)
     open4 (1.1.0)
@@ -119,7 +110,6 @@ DEPENDENCIES
   em-http-request (~> 0.3.0)
   jammit
   jquery-rails (~> 1.0.12)
-  mongrel (~> 1.1.5)
   nokogiri (~> 1.5.0)
   oauth
   pg
