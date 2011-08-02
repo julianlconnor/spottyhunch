@@ -1,6 +1,9 @@
+package_assets: off
+compress_assets: off
+
 javascripts:
   app:
-    - public/javascripts/jquery.min.js
+    - public/javascripts/jquery.js
     - public/javascripts/application.js
     - public/javascripts/jquery_ujs.js
     - public/javascripts/json2.js
