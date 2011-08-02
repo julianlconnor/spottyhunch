@@ -5,7 +5,8 @@ gem 'pg'
 gem 'mongrel'
 gem 'jammit'
 gem 'oauth'
-gem "em-http-request", "~> 0.3.0"
+gem 'em-http-request', '~> 0.3.0'
+gem 'taps'
 
 gem "jquery-rails", "~> 1.0.12"
 
