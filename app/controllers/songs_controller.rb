@@ -85,16 +85,16 @@ class SongsController < ApplicationController
     @artists = []
     @spotify_urls = []
   
-    # Query for 10 similar artists to the artist of the song with params[:id]
+    puts "Query for 10 similar artists to the artist of the song with params[:id]"
     similar_artists = "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=" + URI.encode(@s.artist) + "&limit=15&api_key=46717f37e986f321258ffb9d1191b489"
   
-    # artistUrls holds the last.fm url of each artist
+    puts "artistUrls holds the last.fm url of each artist"
     artistUrls = Hash.new
   
-    # Fetch xml of similar artists
+    puts "Fetch xml of similar artists."
     @doc = Nokogiri::XML(open(similar_artists))
   
-    # Loop through each artist and grab their name and url
+    puts "Loop through each artist and grab their name and url."
     @doc.xpath("//artist").each do |node|
       @artists << node.xpath("./name").text
       artistUrls[@artists.last] = node.xpath("./url").text
@@ -103,20 +103,20 @@ class SongsController < ApplicationController
     EventMachine.run do
       
       
-      # Instantiate multi request
+      puts "Instantiate multi request."
       multi_lastfm = EventMachine::MultiRequest.new
       
-      # Build new MultiRequest for Last.fm
+      puts "Build new MultiRequest for Last.fm."
       url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&limit=2&api_key=46717f37e986f321258ffb9d1191b489&artist="
       @artists.each {|artist| multi_lastfm.add(EventMachine::HttpRequest.new(url+"#{URI.encode(artist)}").get)}
 
       multi_lastfm.callback {
-        # Handle successfull top track fetches by iterating through and fetching spotify url
+        puts "Handle successfull top track fetches by iterating through and fetching spotify url."
         multi_lastfm.responses[:succeeded].each do |resp|
 
           @doc = Nokogiri::XML(resp.response)
           
-          # Solely fetch artist and track names for spotify lookup
+          puts "Solely fetch artist and track names for spotify lookup."
           @doc.xpath("//track").each do |node|
             t = CGI.escape(node.xpath("./name").text)
             a = CGI.escape(node.xpath(".//artist/name").text)
@@ -125,11 +125,13 @@ class SongsController < ApplicationController
           
         end
         
-        # Build new MultiRequest for Spotify
+        puts "Build new MultiRequest for Spotify."
         multi_spotify = EventMachine::MultiRequest.new
         @spotify_urls.each {|url| multi_spotify.add(EventMachine::HttpRequest.new(url).get)}
         
         multi_spotify.callback {
+          
+          puts "Handle successfull fetches from spotify and build @out object."
           multi_spotify.responses[:succeeded].each do |resp|
             @doc = Nokogiri::XML(resp.response)
             @node = @doc.xpath("//xmlns:track").first
@@ -147,7 +149,7 @@ class SongsController < ApplicationController
 
             end
           end
-          # ap @out
+          puts "Stop Event Machine."
           EventMachine.stop
         }
       }
