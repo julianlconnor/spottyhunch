@@ -6,6 +6,7 @@ gem 'mongrel'
 gem 'jammit'
 gem 'ruby-debug'
 gem 'oauth'
+gem "em-http-request", "~> 0.3.0"
 
 gem "jquery-rails", "~> 1.0.12"
 

@@ -80,7 +80,7 @@ $(function(){
               var songs = _(data).map(
                 function(i) {
                 //alert(JSON.stringify(i));
-                return jQuery.parseJSON('{"track":"'+i.track+'","artist":"'+i.artist+'","image":"'+i.image+'","artistUrl":"'+i.artistUrl+'","trackUrl":"'+i.trackUrl+'","spotifyUrl":"'+i.spotifyUrl+'"}');
+                return jQuery.parseJSON('{"track":"'+i.track+'","artist":"'+i.artist+'","image":"'+i.image+'","artistUrl":"'+i.artistUrl+'","trackUrl":"'+i.trackUrl+'","album":"'+i.album+'","albumUrl":"'+i.albumUrl+'","released":"'+i.year+'"}');
               });
               $.each(songs,function(){
                 //alert(JSON.stringify(this));
