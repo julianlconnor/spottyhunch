@@ -119,7 +119,7 @@ DEPENDENCIES
   em-http-request (~> 0.3.0)
   jammit
   jquery-rails (~> 1.0.12)
-  mongrel
+  mongrel (~> 1.1.5)
   nokogiri (~> 1.5.0)
   oauth
   pg
