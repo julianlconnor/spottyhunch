@@ -4,7 +4,6 @@ gem 'rails', '3.0.0'
 gem 'pg'
 gem 'mongrel'
 gem 'jammit'
-gem 'ruby-debug'
 gem 'oauth'
 gem "em-http-request", "~> 0.3.0"
 
