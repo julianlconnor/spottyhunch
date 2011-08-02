@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/documentcloud/jammit.git
+  revision: 3dedc9dffe04a7b7850efc0e494213c92bfdb35f
+  specs:
+    jammit (0.6.3)
+      yui-compressor (>= 0.9.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -45,8 +52,6 @@ GEM
     escape_utils (0.2.3)
     eventmachine (0.12.10)
     i18n (0.4.2)
-    jammit (0.6.3)
-      yui-compressor (>= 0.9.3)
     jquery-rails (1.0.12)
       railties (~> 3.0)
       thor (~> 0.14)
@@ -108,7 +113,7 @@ PLATFORMS
 
 DEPENDENCIES
   em-http-request (~> 0.3.0)
-  jammit
+  jammit!
   jquery-rails (~> 1.0.12)
   nokogiri (~> 1.5.0)
   oauth
