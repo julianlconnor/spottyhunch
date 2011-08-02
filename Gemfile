@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
 gem 'pg'
-gem 'mongrel'
+gem 'mongrel', '~> 1.1.5'
 gem 'jammit'
 gem 'oauth'
 gem 'em-http-request', '~> 0.3.0'
