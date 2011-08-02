@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.0'
 gem 'pg'
 #gem 'mongrel', '~> 1.1.5'
-gem 'jammit'
+gem 'jammit', :git => "git://github.com/documentcloud/jammit.git"
 gem 'oauth'
 gem 'em-http-request', '~> 0.3.0'
 gem 'taps'
