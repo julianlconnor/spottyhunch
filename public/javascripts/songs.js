@@ -114,13 +114,8 @@ $(function(){
 		},
 		
 		setContent: function() {
-			// var title = this.model.get('title');
-			// 			var artist = this.model.get('artist');
-			// 			this.$('.todo-content').text(content);
-			// 			this.input = this.$('.todo-input');
-			// 			this.input.bind('blur', this.close);
-			// 			this.input.val(content);
-	    },
+	  
+    },
 	});
 	
 	window.ErrorView = Backbone.View.extend({
@@ -145,8 +140,9 @@ $(function(){
 
 	  events: {
 	    "submit form#new_song": "createSong",
-	    "keypress input#song_artist": "createOnEnter"
-	  },
+	    "keypress input#song_artist": "createOnEnter",  
+	    "keypress input#song_track": "createOnEnter"
+    },
 
 	  initialize: function(){
 	    _.bindAll(this, 'addOne', 'addAll');
@@ -165,7 +161,6 @@ $(function(){
   	    this.$("#song_list").append(view.render().el);
 	    }
   	  else {
-  	    //console.log("Error");
   	    var error = new ErrorView({model:song});
   	    this.$("#flash_space").html(error.render().el);
   	  }
