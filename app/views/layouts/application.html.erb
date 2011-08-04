@@ -11,4 +11,13 @@
 		<%= yield %>
 	</div>
 </body>
+
+<script type="text/javascript">
+  $(function(){
+    $(".error .closeError").live("click", function(){
+      $(this).parent().slideToggle(250);
+      $("form#new_song input").value = "";  
+    });
+  });
+</script>
 </html>

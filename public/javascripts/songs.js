@@ -165,11 +165,13 @@ $(function(){
   	    this.$("#song_list").append(view.render().el);
 	    }
   	  else {
-  	    console.log("Error");
+  	    //console.log("Error");
   	    var error = new ErrorView({model:song});
   	    this.$("#flash_space").html(error.render().el);
   	  }
-	  },
+	    this.$("input#song_track")[0].value = "";
+      this.$("input#song_artist")[0].value = "";
+    },
   
 	  addAll: function(){
 	    Songs.each(this.addOne);

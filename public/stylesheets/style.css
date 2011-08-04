@@ -69,7 +69,6 @@ ol#song_list li.track {
 	background-position:initial initial;
 	background-repeat:initial initial;
 	box-shadow:white 0 1px 0px, rgba(0, 0, 0, 0.496094) 0 1px 3px 0 inset;
-	text-shadow:#FFFFFF 0 1px 1px;
 	margin-bottom: 5px;
 	border-radius: 3px;
 }
@@ -113,4 +112,23 @@ li div.icons {
 
 li div.icons {
   float: right;
+}
+.genre {
+  background-attachment:initial;
+  background-clip:initial;
+  background-color:#709B9A;
+  background-image:initial;
+  background-origin:initial;
+  border-bottom-left-radius:10px 10px;
+  border-bottom-right-radius:10px 10px;
+  border-top-left-radius:10px 10px;
+  border-top-right-radius:10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -moz-box-shadow: 0 0 1px 0 white;
+  font-size:11px;
+  font-family: 'Century Gothic', 'century gothic', arial, verdana, 'lucida grande', 'lucida sans', 'bitstream vera sans';
+  padding: 5px;
+  float: right;
+  color: white;
+  text-shadow: 0 !important;
 }
