@@ -82,9 +82,27 @@ $(function(){
                 //alert(JSON.stringify(i));
                 return jQuery.parseJSON('{"track":"'+i.track+'","artist":"'+i.artist+'","image":"'+i.image+'","artistUrl":"'+i.artistUrl+'","trackUrl":"'+i.trackUrl+'","album":"'+i.album+'","albumUrl":"'+i.albumUrl+'","released":"'+i.year+'"}');
               });
+
+              // Store drag icon in var
+              var d_icon = $(".dragicon."+id);
+              var txt = d_icon.find(".uriTxt")[0];
+              txt.value = "";
+
+              // Loop through song items and append spotify URI
               $.each(songs,function(){
-                //alert(JSON.stringify(this));
                 $("ol."+id).append(ich.similar_song_item(this));
+                console.log(id); 
+                txt.value += this.trackUrl + " ";
+              });
+              
+              d_icon.slideToggle(25,function(){
+                d_icon.zclip({
+                  path: '/ZeroClipboard.swf',
+                  copy: txt.value,
+                  afterCopy:function(){
+                    alert("Copied your playlist to clipboard. Please paste (CMD+V) into a blank spotify playlist.");
+                  }
+                });
               });
               expand.html("<img src='images/contract.png'/>");
             }

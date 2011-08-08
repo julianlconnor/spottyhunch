@@ -11,4 +11,5 @@ javascripts:
     - public/javascripts/backbone-0.5.0.js
     - public/javascripts/icanhaz.js
     - public/javascripts/songs.js
-    - app/views/songs/*.jst    
+    - public/javascripts/preload.js
+    - public/javascripts/jquery.zclip.js

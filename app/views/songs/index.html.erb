@@ -5,23 +5,36 @@
 	</ol>
   <%= render 'form' %>
 </div>
-	
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  });
+</script>
+
 <script id="song_item" type="text/html">
 <div id='{{id}}'>
 	<div class='listTrackContent'>
 		<div class="content">
-			<div class="trackInfo">
-        <a href="{{trackUrl}}" target="_blank">{{track}}</a> - <a href="{{artistUrl}}" target="_blank">{{artist}}</a>
+			<div class="trackInfo clearfix">
+        <a class="trackName" href="{{trackUrl}}" target="_blank">{{track}} - {{artist}}</a>
 				<div class="icons">
-					<span class="delete"><img src="images/delete.png"/></span>
-					<span class="expand"><img src="images/expand.png"/></span>
+          <span class="delete">
+            <img src="images/delete.png"/>
+          </span>
+          <span class="expand">
+            <img src="images/expand.png"/>
+          </span>
         </div>
         <span class="genre">{{genre}}</span>
+        <div class="dragicon {{id}}">
+          <a class="uriTxt"></a>
+        </div>
 			</div>
 		</div>
 		<ol class="{{id}}">
-		</ol>
-	</div>
+    </ol>
+    
+  </div>
 </div>
 </script>
 

@@ -1,7 +1,19 @@
+.clearfix:after {
+ content: ".";
+ display: block;
+ height: 0;
+ clear: both;
+ visibility: hidden;
+}
+
+.clearfix {
+ display: block;
+}
+
 body {
 	line-height: 1.45em;
 	margin: 0 auto;
-	background-color:#FFE1D6;
+	background-color:#E6FFF1;
 	font: normal normal normal 1em/1.4 Cambria, Georgia, sans-serif;
 }
 
@@ -48,6 +60,9 @@ h1#logo {
 ol#song_list, ol#song_list ol {
 	padding: 0;
 }
+ol#song_list {
+  list-style: none;
+}
 ol#song_list ol {
   margin-left: 30px;
   list-style: decimal-leading-zero;
@@ -64,7 +79,7 @@ ol#song_list li.track {
 	background-attachment:initial;
 	background-clip:initial;
 	background-color:rgba(0, 0, 0, 0.0351562);
-	background-image:initial;
+	ackground-image:initial;
 	background-origin:initial;
 	background-position:initial initial;
 	background-repeat:initial initial;
@@ -95,17 +110,13 @@ li .expand, li .delete {
   cursor: pointer;
 }
 
-span.delete img {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-}
-
 li .expand:hover {
   color: #fcfcfc;
 }
 
 li div.icons {
   padding: 0;
+  height:25px;
   display: inline;
   list-style: none;
 }
@@ -116,7 +127,7 @@ li div.icons {
 .genre {
   background-attachment:initial;
   background-clip:initial;
-  background-color:#BFA9A1;
+  background-color:#559676;
   background-image:initial;
   background-origin:initial;
   border-bottom-left-radius:10px 10px;
@@ -131,4 +142,19 @@ li div.icons {
   float: right;
   color: white;
   text-shadow: 0 !important;
+}
+.trackName {
+  color: #05372D !important;
+  float: left;
+  padding-top: 3px;
+}
+
+.dragicon {
+  padding: 0 5px 0 0;
+  display:none;
+  width: 25px;
+  height: 25px;
+  float: right;
+  cursor: pointer;
+  background: url("/images/spotify-32.png") no-repeat !important;
 }
