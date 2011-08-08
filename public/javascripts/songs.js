@@ -111,9 +111,6 @@ $(function(){
             }
 	      });
 			}
-			//Template stuff goes here
-			// $("#songs_app").html(ich.song_template(song));
-			// 			return this
 		},
 		
 		collapse: function(){
